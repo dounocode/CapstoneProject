@@ -330,6 +330,6 @@ if __name__ == '__main__':
     initialize_database()
     app.run(debug=True)
 
-
+#force git 강제병합으로 commit record 지워짐
 
 
