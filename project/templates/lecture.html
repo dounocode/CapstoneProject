@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강의실</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/lecture.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/transcript.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/community.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/quizNreport.css') }}">
+</head>
+<body>
+  <!-- 공통 탑바 -->
+  <header class="navbar">
+    <a href="{{ url_for('home') }}" class="logo">AIng</a>
+    <div class="avatar">
+        <img src="{{ url_for('static', filename='images/user.png') }}" alt="User Icon">
+    </div>
+  </header>
+
+  <div class="lecture-container">
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <!-- 사이드바 햄버거 아이콘 -->
+        <div class="IconHamburger" onclick="toggleSidebar()">
+          <img src="{{ url_for('static', filename='images/hamburger.png') }}" 
+               alt="메뉴 아이콘" class="hamburger-icon">
+        </div>
+        <h3 class="sidebar-title">Lecture Title</h3>
+      </div>
+      <ul class="lecture-list">
+        <!-- 사이드바 강의, 퀴즈 목록 -->
+        <li data-url="{{ url_for('static', filename='videos/lecture1.mp4') }}" data-index="0" onclick="changeVideo(this)">
+          <img src="{{ url_for('static', filename='images/check.png') }}" alt="완료" class="lecture-icon">
+          <span class="lecture-name">lecture 1</span>
+        </li>
+        <li data-url="{{ url_for('static', filename='videos/lecture2.mp4') }}" data-index="1" onclick="changeVideo(this)"> 
+          <img src="{{ url_for('static', filename='images/check.png') }}" alt="완료" class="lecture-icon">
+          <span class="lecture-name">lecture 2</span>
+        </li>
+        <li data-url="{{ url_for('static', filename='videos/lecture1.mp4') }}" data-index="2" onclick="changeVideo(this)">
+          <img src="{{ url_for('static', filename='images/check.png') }}" alt="완료" class="lecture-icon">
+          <span class="lecture-name">lecture 3</span>
+        </li>
+        <li data-url="{{ url_for('static', filename='videos/lecture2.mp4') }}" data-index="3" onclick="changeVideo(this)">
+          <img src="{{ url_for('static', filename='images/play.png') }}" alt="진행중" class="lecture-icon">
+          <span class="lecture-name">lecture 4</span>
+        </li>
+        <li class="quiz-item" onclick="openQuiz()">
+          <img src="{{ url_for('static', filename='images/exam.png') }}" alt="진행중" class="lecture-icon">
+          <span class="lecture-name">Quiz&Report</span>
+        </li>
+      </ul>
+      <!-- 사이드바 챗봇 영역 -->
+      <div class="sidebar-chatbot" onclick="openChatbotModal()" style="cursor: pointer;">
+        <img src="{{ url_for('static', filename='images/chatbot.png') }}" alt="챗봇 아이콘" class="chatbot-icon">
+        <span class="chatbot-text">chatbot</span>
+      </div>
+
+      <!-- 챗봇 모달창 띄우기 -->
+      <div id="chatbot-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="chat-title">Live Chat</span>
+                <span class="close" onclick="closeChatbotModal()">&times;</span>
+            </div>
+            <!-- 대화 내용이 표시되는 영역 -->
+            <div class="chat-content" id="chat-content">
+                <!-- 동적으로 메시지가 추가될 예정 -->
+            </div>
+            <!-- 메시지 입력 창 -->
+            <div class="chat-input-container">
+                <textarea id="chat-input" placeholder="Type your message"></textarea>
+                <button onclick="sendMessage()">
+                  <img src="{{ url_for('static', filename='images/chat.png') }}" alt="Send" class="chat-icon">
+              </button>
+            </div>
+        </div>
+    </div>
+
+    </aside>
+      <!-- 본문과 바텀바를 포함하는 컨텐츠 영역 -->
+      <div class="content-container">
+        <!-- 퀴즈 영역 -->
+        <div id="quiz-container" style="display: none;">
+          <div>
+              <!-- Quiz와 Report 버튼 -->
+              <div class="button-container">
+                  <button class="learn-more" onclick="openQuizContent()">Quiz</button>
+                  <button class="learn-more" onclick="openReportContent()">Report</button>
+              </div>
+              <button onclick="closeQuiz()">close</button>
+          </div>
+        </div>
+
+        <main class="content">
+          <div class="split-container">
+            <!-- 왼쪽: 버튼 영역 -->
+            <div class="left-panel">
+              <div class="button-group">
+                <div class="svg-wrapper">
+                  <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" height="40" width="150" />
+                    <div id="text">
+                      <a href="#" onclick="showTab('transcript')">Transcript</a>
+                    </div>
+                  </svg>
+                </div>
+  
+                <div class="svg-wrapper">
+                  <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" height="40" width="150" />
+                    <div id="text">
+                      <a href="#" onclick="showTab('exercise')">Exercise</a>
+                    </div>
+                  </svg>
+                </div>
+  
+                <div class="svg-wrapper">
+                  <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" height="40" width="150" />
+                    <div id="text">
+                      <a href="#" onclick="showTab('community')">Community</a>
+                    </div>
+                  </svg>
+                </div>
+              </div>
+              <div class="feature-box">
+                 <!-- 각 기능별 콘텐츠 영역 -->
+                 <div id="transcript" class="tab-content">
+                  <p>Loading transcript...</p>
+                </div>
+               <!-- 실습 영역 -->
+                <div id="exercise" class="tab-content" style="display: none;">
+                  <div class="editor-header">
+                    <div class="language-menu">
+                        <span class="language-tab active" data-language="python" onclick="showEditorTab('python')">Python</span>
+                        <span class="language-tab" data-language="java" onclick="showEditorTab('java')">Java</span>
+                        <span class="language-tab" data-language="cpp" onclick="showEditorTab('cpp')">C++</span>
+                    </div>
+                    <img src="{{ url_for('static', filename='images/debug.png') }}" alt="Debug Icon" class="triangle-icon">
+                </div>
+                
+                  <div class="editor">
+                      <div class="code-editor">
+                          <div class="line-numbers" id="line-numbers"></div>
+                          <!-- contenteditable 속성 제거 및 pre 태그 사용 -->
+                          <pre id="code-box" class="code-content" contenteditable="true" spellcheck="false"></pre>
+                      </div>
+                  </div>
+                </div>
+
+                <!-- 커뮤니티 영역 -->
+                <div id="community" class="tab-content" style="display: none;">
+                  <!-- 포스트 작성 버튼 -->
+                  <div id="post-actions">
+                    <button onclick="openPostForm()" class="post-btn">Create a Post</button>
+                  </div>
+                  
+                  <!-- 게시글 목록 -->
+                  <div id="community-posts">
+                    <!-- JavaScript에서 게시글 동적으로 추가 -->
+                  </div>
+                  
+                  <!-- 게시글 작성 폼 -->
+                  <div id="post-form" style="display: none;">
+                    <button onclick="closePostForm()" class="close-btn">X</button>
+                    <input type="text" id="post-title-input" placeholder="Enter your post title" class="post-title-input" />
+                    <textarea id="post-content-input" placeholder="Enter your post content"></textarea>
+                    <button id="submit-post-btn" class="post-submit-btn">Post</button>
+                  </div>
+                  
+                  <!-- 게시글 상세 보기 -->
+                  <div id="post-details" style="display: none;">
+                    <button onclick="closePostDetails()" class="close-btn">X</button>
+                    <h2 id="post-title"></h2>
+                    <p id="post-created-at" style="font-size: 14px; color: #666; margin-bottom: 10px;"></p> <!-- 작성 시간 추가 -->
+                    <p id="post-content"></p>
+                    <button id="delete-post-btn" class="post-submit-btn" onclick="deletePost()">Delete Post</button>
+                    <div id="comments-container">
+                      <!-- 댓글 동적으로 추가 -->
+                    </div>
+                    <textarea id="comment-content-input" placeholder="Write a comment"></textarea>
+                    <button id="submit-comment-btn" class="post-submit-btn" onclick="submitComment()">Add Comment</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- 중앙의 구분선 -->
+            <div class="vertical-line"></div>
+  
+            <!-- 오른쪽: 비디오 영역 -->
+            <div class="right-panel">
+              <div class="video-placeholder" style="width: 620px; height: 760px; position: relative; background: white;">
+                <video id="video-player" width="560" height="315" controls>
+                  <source src="{{ url_for('static', filename='videos/lecture1.mp4') }}" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+              </div>
+            </div>
+          </div>
+        </main>
+  
+        <!-- 바텀바 -->
+        <div class="bottom-bar">
+          <img src="{{ url_for('static', filename='images/angle-left.png') }}" 
+               alt="왼쪽 화살표" class="bar-icon">
+          
+          <button class="nav-button"></button>
+          <button class="nav-button"></button>
+          <button class="nav-button"></button>
+          <button class="nav-button"></button>
+        
+          <img src="{{ url_for('static', filename='images/angle-right.png') }}" 
+               alt="오른쪽 화살표" class="bar-icon">
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/community.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/transcript.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/quizNreport.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/exercise.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lecture.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tesseractjh/fg-editor@main/dist/fg-editor.min.js"></script>
+</body>
+</html>

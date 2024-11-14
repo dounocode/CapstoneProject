@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 강의 플랫폼 - 메인 페이지</title>
+  <!-- Google Fonts 링크 추가 -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header class="navbar">
+      <a href="{{ url_for('home') }}" class="logo">AIng</a>
+      <div class="avatar">
+          <img src="{{ url_for('static', filename='images/user.png') }}" alt="User Icon">
+      </div>
+    </header>
+
+    <section class="hero">
+      <h2 class="animated-text" style="font-size: 60px;">
+        Hello World! <br>
+        Let's Get it <span id="dynamic-text"></span>
+      </h2>
+      <h1 class="hero-title">AIng에서 AI 전문가로 성장하는 여정을 함께합니다</h1>
+      <div class="buttons">
+        <button class="btn-hover color-1" onclick="location.href='/lecture'">Start</button>
+      </div>
+      <img src="{{ url_for('static', filename='images/arrow-down.gif') }}" alt="아래 화살표" class="arrow-gif">
+    </section>
+    <div class="news-section">
+      <h2 class="news-title">AI News of the Day</h2>
+      <div class="news-container" id="news-container">
+          <!-- JavaScript에서 뉴스 카드들이 여기에 추가됩니다. -->
+      </div>
+  </div>
+  
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

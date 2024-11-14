@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  #quiz-container {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-height: 80vh; /* 화면 높이의 80%로 제한 */
+    overflow-y: auto; /* 수직 스크롤 활성화 */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: inherit;
+    font-family: 'Rubik', sans-serif; /* 버튼에만 Rubik 폰트 적용 */
+  }
+  
+  button.learn-more {
+    font-weight: 600;
+    color: #003D4D; /* 버튼 텍스트 색상 */
+    text-transform: uppercase;
+    padding: 1em 1.5em;
+    background: #e6fbfd; /* 버튼 배경색 */
+    border: 2px solid #00AABB; /* 버튼 테두리 색상 */
+    border-radius: 0.75em;
+    transform-style: preserve-3d;
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
+  
+  button.learn-more::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #B2EBF2; /* 버튼 배경 그림자 색상 */
+    border-radius: inherit;
+    box-shadow: 0 0 0 2px #00AABB, 0 0.625em 0 0 #80DEEA; /* 버튼 그림자 색상 */
+    transform: translate3d(0, 0.75em, -1em);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
+  
+  button.learn-more:hover {
+    background: #B2EBF2; /* 버튼 호버 배경색 */
+    transform: translate(0, 0.25em);
+  }
+  
+  button.learn-more:hover::before {
+    box-shadow: 0 0 0 2px #00AABB, 0 0.5em 0 0 #80DEEA; /* 버튼 호버 시 그림자 */
+    transform: translate3d(0, 0.5em, -1em);
+  }
+  
+  button.learn-more:active {
+    background: #B2EBF2; /* 버튼 활성화 배경색 */
+    transform: translate(0em, 0.75em);
+  }
+  
+  button.learn-more:active::before {
+    box-shadow: 0 0 0 2px #00AABB, 0 0 #80DEEA; /* 버튼 활성화 시 그림자 */
+    transform: translate3d(0, 0, -1em);
+  }
+  
+
+/* 퀴즈 및 레포트 콘텐츠 스타일 */
+/* 레포트 콘텐츠 스타일 */
+#report-content {
+    width: 100%;
+    max-width: 1000px;
+}
+
+#report-content h3 {
+    font-size: 1.5em;
+    color: #003D4D;
+    margin-bottom: 10px;
+}
+
+#report-content p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#report-content textarea {
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+}
+
+#report-content button {
+    padding: 10px 20px;
+    background-color: #00AABB;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+#report-content button:hover {
+    background-color: #007c8a;
+}
+
+
+#quiz-content {
+    max-height: 60vh; /* 화면 높이의 60%로 제한하여 스크롤 */
+    overflow-y: auto; /* 이 영역에만 수직 스크롤 적용 */
+    width: 100%; /* 퀴즈 콘텐츠가 컨테이너 전체 너비를 차지하도록 설정 */
+    margin-top: 20px;
+}
+
+#quiz-container > div > button {
+    display: block;
+    margin: 20px auto 0; /* 위 버튼들과 20px 간격을 두고, 중앙 정렬 */
+  }
+  

@@ -1,0 +1,129 @@
+/* 사이드바 */
+.sidebar {
+    width: 240px;
+    background-color: #FFFFFF;
+    padding: 15px;
+    transition: width 0.2s ease; /* 너비 전환 애니메이션 */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 상단과 하단 배치를 분리 */
+    height: calc(100vh - 50px); /* 전체 높이 채우기 */
+  }
+  
+  /* 사이드바 제목 스타일 */
+  .sidebar-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: black;
+    margin: 0;
+  }
+  
+  /* 강의 목록 스타일 */
+  .lecture-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 30px; /* 강의 목록과 제목 사이 간격 */
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* 항목 사이 간격 */
+  }
+  
+  /* 강의 항목 스타일 */
+  .lecture-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 아이콘과 텍스트 사이 간격 */
+  }
+  
+  /* 아이콘 스타일 */
+  .lecture-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+  
+  /* 강의명 스타일 (링크 제거) */
+  .lecture-name {
+    font-size: 1.2rem; /* 텍스트 크기 조정 */
+    color: black;
+    text-decoration: none; /* 하이퍼링크 밑줄 제거 */
+    cursor: pointer;
+  }
+  
+  /* lecture-name hover 효과 */
+  .lecture-name:hover {
+    color: #007a87; /* hover 시 색상 변경 */
+  }
+  
+  /* 햄버거 아이콘 스타일 */
+  .hamburger-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer; /* 클릭 가능한 포인터 표시 */
+    object-fit: cover; /* 이미지가 비율을 유지하며 잘 맞도록 설정 */
+    margin-bottom: 15px; 
+  }
+  
+  /* 챗봇 영역 */
+  .sidebar-chatbot {
+    background-color: #ffffff; /* 하얀 배경 */
+    height: 70px; /* 바텀바와 동일한 높이 */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px; /* 아이콘과 텍스트 사이 간격 */
+    color: #000000; /* 텍스트 색상 */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.75rem;
+    margin-top: auto; /* 남은 공간을 모두 위쪽에 밀어내기 */
+    padding: 0 0px; /* 양옆 패딩 추가 시 아이콘이 너무 오른쪽에 있어서 줄임 */
+    box-sizing: border-box;
+  }
+  
+  /* 챗봇 아이콘 */
+  .chatbot-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain; /* 비율 유지 */
+  }
+  
+  /* content-container: 바텀바 포함 콘텐츠 영역 */
+  .content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* 부모 높이 채우기 */
+  }
+  
+  /* 강의 제목 */
+  .sidebar h3 { 
+    margin: 0;
+    font-size: 1.2em; 
+    color: black; 
+  }
+  
+  .content {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+  }
+  
+  /* 사이드바 접기 */
+  .sidebar.collapsed {
+    width: 60px; /* 접힌 상태의 사이드바 너비 */
+  }
+  
+  /* 사이드바 접힐때 동작 */
+  .sidebar h3, .sidebar ul, .sidebar .chatbot-text {
+    transition: opacity 0.2s ease;
+  }
+  
+  .sidebar.collapsed h3, .sidebar.collapsed ul, .sidebar.collapsed .chatbot-text {
+    display: none; /* 사이드바 접힌 상태에서 텍스트 삭제 */
+  }
+  
+  .sidebar.collapsed .sidebar-chatbot {
+    justify-content: center; /* 사이드바 접힌 상태에서 중앙 정렬 */
+  }

@@ -1,0 +1,46 @@
+/* 모든 페이지에 탑바가 동일하게 있어야 함으로 따로 코드를 뺐음 */
+.navbar {
+    width: 100%;
+    height: 50px;
+    background: #000000; /* 메인 바 색깔 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 아래쪽에 가벼운 그림자 */
+}
+
+/* 로고 스타일 */
+.logo {
+    font-size: 28px; /* 폰트를 좀 더 작게 조절 */
+    color: #00E5FF; 
+    font-weight: bold; 
+    font-family: Arial, sans-serif; 
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+/* 아이콘 스타일 */
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #111; 
+    border: 1px solid #00E5FF; /* 로고 색상과 맞춘 테두리 */
+    overflow: hidden; 
+}
+
+/* 사용자 이미지 스타일 */
+.avatar img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover; 
+    filter: grayscale(100%); 
+    transition: filter 0.3s ease; /* 마우스 오버 시 효과 전환 */
+}
+
+.avatar:hover img {
+    filter: none; /* 마우스 오버 시 원래 색상 복원 */
+}
