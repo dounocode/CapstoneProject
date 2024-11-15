@@ -81,7 +81,14 @@ def fetch_latest_news():
         for article in articles:
             try:
                 title = article.find_element(By.XPATH, "./div[2]/h3").text.strip()
-                link = "https://news.mit.edu" + article.find_element(By.XPATH, "./div[2]/h3/a").get_attribute("href")
+                
+                # 아래 부분에서 URL 중복 문제를 해결하기 위한 수정
+                link = article.find_element(By.XPATH, "./div[2]/h3/a").get_attribute("href")
+                
+                # href가 절대 URL인지 확인하여 처리
+                if not link.startswith("http"):
+                    link = "https://news.mit.edu" + link
+
                 summary = article.find_element(By.XPATH, "./div[2]/p[1]/span").text.strip()
                 date = article.find_element(By.XPATH, "./div[2]/p[2]").text.strip()
 
